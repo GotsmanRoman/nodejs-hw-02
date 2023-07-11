@@ -7,7 +7,7 @@ const contactsSchema = Joi.object().keys({
     "any.required": "Field 'email' is missing",
   }),
   phone: Joi.string().required().messages({
-    "any.required": "Field 'email' is missing",
+    "any.required": "Field 'phone' is missing",
   }),
 });
 
