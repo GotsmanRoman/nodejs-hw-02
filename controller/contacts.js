@@ -2,7 +2,7 @@ const Contact = require("../models/contact");
 const { HttpError, Wrapper } = require("../helpers");
 
 const getAll = async (req, res) => {
-  const result = await Contact.find();
+  const result = await Contact.find({}, "-createdAt -updatedAt");
   res.json(result);
 };
 
@@ -45,7 +45,7 @@ const deleteById = async (req, res) => {
   const { contactId } = req.params;
   const result = await Contact.findByIdAndRemove(contactId);
   if (!result) {
-    throw new HttpError(404, "Not found");
+    throw HttpError(404, "Not found");
   }
   res.json({ message: "contact deleted" });
 };
