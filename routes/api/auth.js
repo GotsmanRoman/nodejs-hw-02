@@ -8,7 +8,7 @@ const controller = require("../../controller/auth");
 router.post("/register", validateBody(registerSchema), controller.register);
 router.post("/login", validateBody(registerSchema), controller.login);
 router.get("/current", authenticate, controller.getCurrent);
-router.get("/logout", authenticate, controller.logout);
+router.post("/logout", authenticate, controller.logout);
 router.patch(
   "/",
   authenticate,
