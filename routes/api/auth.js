@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { registerSchema, subscriptionSchema } = require("../../Schemas/user");
+const {
+  registerSchema,
+  subscriptionSchema,
+  verifyEmailSchema,
+} = require("../../Schemas/user");
 const { validateBody, authenticate, upload } = require("../../middlewares");
 
 const controller = require("../../controller/auth");
@@ -20,6 +24,12 @@ router.patch(
   authenticate,
   upload.single("avatar"),
   controller.updateAvatar
+);
+router.get("/verify/:verificationToken", controller.verifyEmail);
+router.post(
+  "/verify",
+  validateBody(verifyEmailSchema),
+  controller.resendVerifyEmail
 );
 
 module.exports = router;
